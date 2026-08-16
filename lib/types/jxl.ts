@@ -24,10 +24,16 @@ function extractPartialStreams(input: Uint8Array): Uint8Array[] {
   while (offset < input.length) {
     const jxlpBox = findBox(input, 'jxlp', offset)
     if (!jxlpBox) break
-    partialStreams.push(
-      input.slice(jxlpBox.offset + 12, jxlpBox.offset + jxlpBox.size),
-    )
-    offset = jxlpBox.offset + jxlpBox.size
+    const nextOffset = jxlpBox.offset + jxlpBox.size
+    if (
+      jxlpBox.size < 12 ||
+      nextOffset <= offset ||
+      nextOffset > input.length
+    ) {
+      throw new TypeError('Invalid JXL')
+    }
+    partialStreams.push(input.slice(jxlpBox.offset + 12, nextOffset))
+    offset = nextOffset
   }
   return partialStreams
 }

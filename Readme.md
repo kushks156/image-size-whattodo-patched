@@ -1,3 +1,10 @@
+# WhatToDo security fork
+
+This public fork carries bounded parser progress checks for
+`CVE-2025-71329` and `CVE-2025-71330` while the upstream package has no
+patched release. WhatToDo pins an exact commit of this fork. The original MIT
+license and attribution are preserved.
+
 # Tired maintainer doesn't want your slop
 Archiving this repo, because I don't want to deal with the same LLM generated "security advisory" about an inifinite loop over and over again.  
 I do not wish to participate in this sloppy mess of a platform. 

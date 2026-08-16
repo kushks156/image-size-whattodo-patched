@@ -1,6 +1,6 @@
 {
   "name": "image-size",
-  "version": "2.0.2",
+  "version": "2.0.3-whattodo.1",
   "description": "get dimensions of any image file",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -82,7 +82,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/image-size/image-size.git"
+    "url": "git://github.com/kushks156/image-size-whattodo-patched.git"
   },
   "author": "netroy <aditya@netroy.in> (http://netroy.in/)",
   "license": "MIT",

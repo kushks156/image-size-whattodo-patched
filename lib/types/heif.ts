@@ -42,6 +42,16 @@ export const HEIF: IImage = {
     while (currentOffset < ipcoBox.offset + ipcoBox.size) {
       const ispeBox = findBox(input, 'ispe', currentOffset)
       if (!ispeBox) break
+      const nextOffset = ispeBox.offset + ispeBox.size
+      const ipcoEnd = ipcoBox.offset + ipcoBox.size
+      if (
+        ispeBox.size < 20 ||
+        nextOffset <= currentOffset ||
+        nextOffset > ipcoEnd ||
+        nextOffset > input.length
+      ) {
+        throw new TypeError('Invalid HEIF')
+      }
 
       const rawWidth = readUInt32BE(input, ispeBox.offset + 12)
       const rawHeight = readUInt32BE(input, ispeBox.offset + 16)
@@ -49,7 +59,7 @@ export const HEIF: IImage = {
       // Look for a clap box after the ispe box
       const clapBox = findBox(input, 'clap', currentOffset)
       let width = rawWidth
-      let height = rawHeight
+      const height = rawHeight
       if (clapBox && clapBox.offset < ipcoBox.offset + ipcoBox.size) {
         const cropRight = readUInt32BE(input, clapBox.offset + 12)
         width = rawWidth - cropRight
@@ -57,7 +67,7 @@ export const HEIF: IImage = {
 
       images.push({ height, width })
 
-      currentOffset = ispeBox.offset + ispeBox.size
+      currentOffset = nextOffset
     }
 
     if (images.length === 0) {

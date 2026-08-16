@@ -92,10 +92,25 @@ export const ICNS: IImage = {
     const images: ISize[] = []
 
     while (imageOffset < fileLength && imageOffset < inputLength) {
+      if (inputLength - imageOffset < SIZE_HEADER) {
+        throw new TypeError('Invalid ICNS')
+      }
+
       const imageHeader = readImageHeader(input, imageOffset)
+      const entryLength = imageHeader[1]
+      const nextImageOffset = imageOffset + entryLength
+      if (
+        entryLength < SIZE_HEADER ||
+        nextImageOffset <= imageOffset ||
+        nextImageOffset > fileLength ||
+        nextImageOffset > inputLength
+      ) {
+        throw new TypeError('Invalid ICNS')
+      }
+
       const imageSize = getImageSize(imageHeader[0])
       images.push(imageSize)
-      imageOffset += imageHeader[1]
+      imageOffset = nextImageOffset
     }
 
     if (images.length === 0) {

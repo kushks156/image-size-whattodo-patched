@@ -1,18 +1,18 @@
-import { describe, it } from 'node:test'
 import * as assert from 'node:assert'
+import { describe, it } from 'node:test'
 import {
-  toUTF8String,
-  toHexString,
+  findBox,
   readInt16LE,
+  readInt32LE,
+  readUInt,
   readUInt16BE,
   readUInt16LE,
   readUInt24LE,
-  readInt32LE,
   readUInt32BE,
   readUInt32LE,
-  readUInt,
-  findBox,
   readUInt64,
+  toHexString,
+  toUTF8String,
 } from '../lib/types/utils'
 
 describe('Utils', () => {
