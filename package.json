@@ -1,6 +1,6 @@
 {
   "name": "image-size",
-  "version": "2.0.3-whattodo.2",
+  "version": "2.0.3-whattodo.3",
   "description": "get dimensions of any image file",
   "main": "./compat.cjs",
   "module": "./dist/index.mjs",

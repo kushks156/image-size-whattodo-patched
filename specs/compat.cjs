@@ -1,6 +1,7 @@
 'use strict'
 
 const assert = require('node:assert/strict')
+const path = require('node:path')
 const imageSize = require('../compat.cjs')
 
 assert.equal(typeof imageSize, 'function')
@@ -15,3 +16,10 @@ assert.deepEqual(
   ),
   { height: 1, width: 1, type: 'png' },
 )
+
+const fileResult = imageSize(
+  path.join(__dirname, 'images', 'valid', 'png', 'sample.png'),
+)
+assert.equal(fileResult.type, 'png')
+assert.ok(fileResult.width > 0)
+assert.ok(fileResult.height > 0)
