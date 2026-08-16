@@ -1,8 +1,8 @@
 {
   "name": "image-size",
-  "version": "2.0.3-whattodo.1",
+  "version": "2.0.3-whattodo.2",
   "description": "get dimensions of any image file",
-  "main": "./dist/index.cjs",
+  "main": "./compat.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -13,7 +13,7 @@
       },
       "require": {
         "types": "./dist/index.d.ts",
-        "default": "./dist/index.cjs"
+        "default": "./compat.cjs"
       }
     },
     "./fromFile": {
@@ -39,6 +39,7 @@
   },
   "files": [
     "dist",
+    "compat.cjs",
     "bin/image-size.js"
   ],
   "engines": {
@@ -50,6 +51,7 @@
     "lint": "biome check lib specs",
     "format": "biome format --write lib specs",
     "test": "TS_NODE_PROJECT=tsconfig.test.json c8 --reporter=text --reporter=lcov node --require ts-node/register --test --test-reporter=dot specs/*.spec.ts",
+    "test:compat": "node specs/compat.cjs",
     "test:watch": "TS_NODE_PROJECT=tsconfig.test.json node --require ts-node/register --test --watch specs/*.spec.ts",
     "clean": "rm -rf dist docs",
     "generate-docs": "typedoc",
