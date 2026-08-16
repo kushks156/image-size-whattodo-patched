@@ -54,7 +54,7 @@
     "clean": "rm -rf dist docs",
     "generate-docs": "typedoc",
     "build": "tsup",
-    "prepack": "yarn clean && yarn build"
+    "prepack": "corepack yarn build"
   },
   "keywords": [
     "image",
